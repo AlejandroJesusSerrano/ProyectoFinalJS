@@ -1,0 +1,16 @@
+node_modules/
+scss/
+src/
+wireframes/
+ror.xml
+sitemap.html
+sitemap.xml
+package-lock.json
+package.json
+urlist.txt
+.htaccess
+*.ai
+*.temp
+*.psd
+*.doc
+*.docx
