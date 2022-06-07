@@ -171,8 +171,6 @@ function showAvailableRooms()
         {
             selection = event.target.parentNode.firstChild.innerHTML;
             selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
-
-            console.log(selectedRoom)
         });
 
         availDivContainer.appendChild(nodoTr);

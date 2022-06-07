@@ -3,8 +3,8 @@ const showAvailBtnToReserve = document.getElementById('toReserveBtn');
 
 btnAvail.addEventListener('click', ()=>
 {
-    verifyFormComplete();
     getData();
+    verifyFormComplete();
     exitDate();
     
 });
