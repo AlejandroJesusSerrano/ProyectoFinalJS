@@ -1,5 +1,3 @@
-let selRoom
-let nodoBtn
 
 function showAvailDataAndButton(){
     const btnToReserve = document.getElementById("toReserveBtn");
@@ -122,6 +120,8 @@ function showAvailableRooms()
 
     availDivContainer.appendChild(header);
 
+    // se pinta tabla de seleccion de habitaciones basado en roomClass
+
     bedroomsStockJSON.forEach((room)=>{
 
         const nodoTr = document.createElement("tr");
@@ -168,13 +168,21 @@ function showAvailableRooms()
         nodoTr.appendChild(nodoBtn);
     
         // se necesita recuperar el valor de selectedRoom, para avanzar en logica mas estricta
-        selRoom = nodoBtn.addEventListener('click', (event) => 
+     
+        nodoBtn.addEventListener('click', (event) => 
         {
+            // se apunta al boton de cada fila que representa un objeto
                 selection = event.target.parentNode.firstChild.innerHTML;
+                // por medio de find. se busca limitar al ID
                 selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
                 console.log(selectedRoom);
         });
-
+               
         availDivContainer.appendChild(nodoTr);
+            
     });
 };
+
+
+
+ 
