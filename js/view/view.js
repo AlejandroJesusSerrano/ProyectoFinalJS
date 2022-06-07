@@ -1,6 +1,15 @@
 let selectedRoom
 let nodoBtn
 
+function showAvailDataAndButton(){
+    const btnToReserve = document.getElementById("toReserveBtn");
+    let showData = document.getElementById('availShowDataDiv');
+    
+    btnToReserve.setAttribute("style", "display:block");
+    showData.setAttribute("style", "display:block");
+    
+};
+
 function viewAvailData()
 {
     let divAvailDataTable = document.getElementById("showAvailFormTableData");
@@ -66,15 +75,7 @@ function viewAvailData()
 
     availDataTable.appendChild (formAvailDataCaptureTr);
     
-};
-
-function showAvailDataAndButton(){
-    const btnToReserve = document.getElementById("toReserveBtn");
-    let showData = document.getElementById('availShowDataDiv');
-    
-    btnToReserve.setAttribute("style", "display:block");
-    showData.setAttribute("style", "display:block");
-    
+    showAvailDataAndButton()
 };
 
 function showAvailableRooms()

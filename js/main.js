@@ -29,4 +29,16 @@ function checkSelectedRoom(){
         alert(selectedRoom);
 };
 
+function verifyFormComplete()
+{
+        if (availData.dateIn === undefined || availData.nights === "0" || availData.rooms === 0 || availData.adults === 0) 
+        {
+                alertIncomplete();
+        }
+        else 
+        {
+                viewAvailData();
+                showAvailDataAndButton();
+        };
+};
 
