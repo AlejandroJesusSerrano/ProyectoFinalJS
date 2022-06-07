@@ -1,4 +1,4 @@
-let selectedRoom
+let selRoom
 let nodoBtn
 
 function showAvailDataAndButton(){
@@ -166,14 +166,15 @@ function showAvailableRooms()
         nodoBtn.setAttribute('id', 'chooseRoomBtn');
         nodoBtn.innerHTML = 'Seleccionar';
         nodoTr.appendChild(nodoBtn);
-
-        nodoBtn.addEventListener('click', (event)=>
+    
+        // se necesita recuperar el valor de selectedRoom, para avanzar en logica mas estricta
+        selRoom = nodoBtn.addEventListener('click', (event) => 
         {
-            selection = event.target.parentNode.firstChild.innerHTML;
-            selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
+                selection = event.target.parentNode.firstChild.innerHTML;
+                selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
+                console.log(selectedRoom);
         });
 
         availDivContainer.appendChild(nodoTr);
-
     });
 };
