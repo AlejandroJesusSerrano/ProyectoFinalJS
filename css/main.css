@@ -7835,7 +7835,9 @@ body {
 
 .availForm input[type="date"], .contactForm input[type="date"],
 .availForm select,
-.contactForm select {
+.contactForm select,
+.availForm input[type="number"],
+.contactForm input[type="number"] {
   box-sizing: border-box;
   width: 100%;
   padding: .7em;
@@ -7927,7 +7929,7 @@ input[type="date"]::-webkit-inner-spin-button, ::-webkit-calendar-picker-indicat
     font-size: 2em;
     color: #d7ccc8; }
   .contactForm div input[Type="text"],
-  .contactForm div input[Type="tel"],
+  .contactForm div input[Type="number"] input[Type="tel"],
   .contactForm div input[Type="email"],
   .contactForm div textarea {
     box-sizing: border-box;

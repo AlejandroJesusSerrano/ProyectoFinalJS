@@ -1,4 +1,3 @@
-
 function showAvailDataAndButton(){
     const btnToReserve = document.getElementById("toReserveBtn");
     let showData = document.getElementById('availShowDataDiv');
@@ -59,11 +58,7 @@ function viewAvailData()
     formAvailDataCaptureTdDateOut.innerHTML = availData.dateIn.add(`${availData.nights}`, 'day').format("DD/MM/YYYY");
     formAvailDataCaptureTr.appendChild(formAvailDataCaptureTdDateOut);
     
-    let formAvailDataCaptureTdRoomsQ = document.createElement("td");
-    formAvailDataCaptureTdRoomsQ.innerHTML = availData.rooms;
-    formAvailDataCaptureTr.appendChild(formAvailDataCaptureTdRoomsQ);
-    
-    let formAvailDataCaptureTdAdultsQ = document.createElement("td");
+    formAvailDataCaptureTdAdultsQ = document.createElement("td");
     formAvailDataCaptureTdAdultsQ.innerHTML = availData.adults;
     formAvailDataCaptureTr.appendChild(formAvailDataCaptureTdAdultsQ);
     
@@ -75,6 +70,7 @@ function viewAvailData()
     
     showAvailDataAndButton()
 };
+
 
 function showAvailableRooms()
 {
@@ -167,22 +163,27 @@ function showAvailableRooms()
         nodoBtn.innerHTML = 'Seleccionar';
         nodoTr.appendChild(nodoBtn);
     
-        // se necesita recuperar el valor de selectedRoom, para avanzar en logica mas estricta
-     
+        
+        
         nodoBtn.addEventListener('click', (event) => 
         {
             // se apunta al boton de cada fila que representa un objeto
-                selection = event.target.parentNode.firstChild.innerHTML;
-                // por medio de find. se busca limitar al ID
-                selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
-                console.log(selectedRoom);
+            selection = event.target.parentNode.firstChild.innerHTML;
+            // por medio de find. se busca limitar al ID
+            selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
+            prepareReserve(selectedRoom);
         });
-               
+            
         availDivContainer.appendChild(nodoTr);
             
     });
 };
 
+function prepareReserve(selectedRoom)
+{
+    let reserve = new Reserve(availData.dateIn, availData.nights, selectedRoom.id, selectedRoom.availability)
+    
+    reserve = JSON.stringify(reserve)
+    localStorage.setItem("occupation", reserve)
 
-
- 
+};

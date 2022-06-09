@@ -6,7 +6,6 @@ class Availability
         this.dateIn=dateIn
         this.dateOut=dateOut
         this.nights=nights
-        this.rooms=rooms
         this.adults=adults
         this.kids=kids
     }

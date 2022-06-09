@@ -1,14 +1,16 @@
 
 
 // modulo de disponibilidad
-const dateOcuppied = ['2022/06/10', '2022/06/11', '2022/06/12', '2022/06/13','2022/06/14', '2022/06/15','2022/06/16','2022/06/17','2022/06/18']
+const dateOcuppied = []
+const roomReserved = []
 
+
+let roomsQuantity = availData.room
 let dataTable = document.getElementById("availBedroomsTable")
 
 function getData(){
         availData.dateIn = dayjs(document.getElementById('date').value)
         availData.nights = Number(document.getElementById('night').value),
-        availData.rooms = Number(document.getElementById('room').value), 
         availData.adults = Number(document.getElementById('adult').value),
         availData.kids = Number(document.getElementById('kid').value)
 }
@@ -42,3 +44,41 @@ function verifyFormComplete()
         };
 };
 
+function verificarFecha()
+{
+        if(dateOcuppied.includes(`${availData.dateIn}`))
+        {
+        
+                return false;
+        }
+        else
+        {
+
+                for (i=1; i<=availData.nights;i++)
+                {       
+                        dayjs(availData.dateIn.add(i, 'day').format("YYYY/MM/DD"));
+                        dateOcuppied.push(availData.dateIn);
+                };
+                
+        };
+};
+
+function roomReserveUp()
+{
+        if(!localStorage.getItem("roomReservedJSON"))
+        {
+                roomRervedJSON = JSON.stringify(roomReserved);
+                localStorage.setItem("roomReserved", roomReservedJSON);
+                       
+        }
+        else
+        {
+
+                for (i=1; i<=availData.nights;i++)
+                {       
+                        dayjs(availData.dateIn.add(i, 'day').format("YYYY/MM/DD"));
+                        dateOcuppied.push(availData.dateIn);
+                };
+                
+        };
+};

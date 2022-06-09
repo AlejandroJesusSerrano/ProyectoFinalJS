@@ -6,6 +6,7 @@ btnAvail.addEventListener('click', ()=>
     getData();
     verifyFormComplete();
     exitDate();
+    verificarFecha()
     
 });
 
