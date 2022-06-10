@@ -1,7 +1,7 @@
 // construccion clase disponibilidad
 class Availability
 {
-    constructor(dateIn, dateOut, nights, rooms, adults, kids)
+    constructor(dateIn, dateOut, nights, adults, kids)
     {
         this.dateIn=dateIn
         this.dateOut=dateOut

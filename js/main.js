@@ -2,8 +2,6 @@
 
 // modulo de disponibilidad
 const dateOcuppied = []
-const roomReserved = []
-
 
 let roomsQuantity = availData.room
 let dataTable = document.getElementById("availBedroomsTable")
@@ -44,41 +42,71 @@ function verifyFormComplete()
         };
 };
 
-function verificarFecha()
+function roomReserveArrayCheck()
 {
-        if(dateOcuppied.includes(`${availData.dateIn}`))
+        let roomReserved = [];
+        if(!localStorage.getItem('roomReservedJson'))
         {
+                localStorage.setItem('roomReservedJson', JSON.stringify(roomReserved));
+        }
+        else{
+                JSON.parse(localStorage.getItem('roomReservedJson'));
+        };      
+        return roomReserved;
+};
+
+function verifyAvailavility()
+{
+        let roomReserved = roomReserveArrayCheck()
+
+        if(roomReserved.length!=0)
+        {
+                roomReserved.foreach((reserve) =>
+                {
+                        if(reserve.availability>0 && reserve.occupantsMax>=adults)
+                        {
+                                const bedroomStockFiltered = bedroomsStockJSON.filter((maxOc) =>maxOc.occupantsMax>=availData.adults);
+                                return bedroomStockFiltered;
+                        }
+                        else
+                        {
+                                alert(`Lo sentimos, No tenemos habitaciones disponibles para las fechas seleccionadas
+                                Por favor reintete en otra fechas.
+                                ¡Muchas Gracias!`)
+                        };
+                });
+        }
+        else{
+                bedroomStockFiltered = bedroomsStockJSON.filter((maxOc) =>maxOc.occupantsMax>=availData.adults);
+                filterBedrooms(bedroomStockFiltered)
+        };
+};
+
+function filterBedrooms(bedroomsStockFiltered){
+        console.log(bedroomsStockFiltered);
+};
+
+function prepareReserve(selectedRoom)
+{
+        let reserve = new Reserve(availData.dateIn, availData.nights, selectedRoom.id, selectedRoom.availability, selectedRoom.occupantsMax)
+        let roomReserved = [];
+        roomReserved = JSON.parse(localStorage.getItem('roomReservedJson'));
+
+        reserve.availability -= 1;
         
-                return false;
+        if (reserve.dateQ>1)
+        {        
+                for(let i=1; i<=reserve.dateQ; i++)
+                {
+                        dayjs(reserve.dateReserve.add(1, 'day'));
+                        roomReserved.push(reserve);
+                };
         }
         else
         {
-
-                for (i=1; i<=availData.nights;i++)
-                {       
-                        dayjs(availData.dateIn.add(i, 'day').format("YYYY/MM/DD"));
-                        dateOcuppied.push(availData.dateIn);
-                };
-                
+                roomReserved.push(reserve);
         };
+
+        roomReserved = localStorage.setItem("roomReservedJson", JSON.stringify(roomReserved));        
 };
 
-function roomReserveUp()
-{
-        if(!localStorage.getItem("roomReservedJSON"))
-        {
-                roomRervedJSON = JSON.stringify(roomReserved);
-                localStorage.setItem("roomReserved", roomReservedJSON);
-                       
-        }
-        else
-        {
-
-                for (i=1; i<=availData.nights;i++)
-                {       
-                        dayjs(availData.dateIn.add(i, 'day').format("YYYY/MM/DD"));
-                        dateOcuppied.push(availData.dateIn);
-                };
-                
-        };
-};

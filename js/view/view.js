@@ -118,7 +118,7 @@ function showAvailableRooms()
 
     // se pinta tabla de seleccion de habitaciones basado en roomClass
 
-    bedroomsStockJSON.forEach((room)=>{
+    bedroomsStockFiltered.forEach((room)=>{
 
         const nodoTr = document.createElement("tr");
         let nodoTd = document.createElement("td");
@@ -158,32 +158,23 @@ function showAvailableRooms()
         nodoTd.innerHTML = room.availability;
         nodoTr.appendChild(nodoTd);
 
-        
         nodoBtn.setAttribute('id', 'chooseRoomBtn');
         nodoBtn.innerHTML = 'Seleccionar';
         nodoTr.appendChild(nodoBtn);
-    
-        
-        
+
         nodoBtn.addEventListener('click', (event) => 
         {
             // se apunta al boton de cada fila que representa un objeto
             selection = event.target.parentNode.firstChild.innerHTML;
             // por medio de find. se busca limitar al ID
             selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
+            alert(`Ha seleccionado la habitacion ${selectedRoom.type}`)
+            roomReserveArrayCeck();
             prepareReserve(selectedRoom);
         });
-            
+
         availDivContainer.appendChild(nodoTr);
             
     });
 };
 
-function prepareReserve(selectedRoom)
-{
-    let reserve = new Reserve(availData.dateIn, availData.nights, selectedRoom.id, selectedRoom.availability)
-    
-    reserve = JSON.stringify(reserve)
-    localStorage.setItem("occupation", reserve)
-
-};

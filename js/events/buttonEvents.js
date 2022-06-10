@@ -3,11 +3,11 @@ const showAvailBtnToReserve = document.getElementById('toReserveBtn');
 
 btnAvail.addEventListener('click', ()=>
 {
+    roomReserveArrayCheck()
     getData();
     verifyFormComplete();
     exitDate();
-    verificarFecha()
-    
+    verifyAvailavility();
 });
 
 showAvailBtnToReserve.addEventListener('click', ()=>
