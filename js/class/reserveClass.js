@@ -1,21 +1,22 @@
-class Reserve
+class AvailToReserve
 {
-    constructor(dateReserve, dateQ, roomType, availability, maxOccupants)
+    constructor(dateReserve, dateQ, persons, rooms)
     {
         this.dateReserve=dateReserve;
         this.dateQ=dateQ;
-        this.roomType=roomType;
-        this.availability=availability;
-        this.maxOccupants=maxOccupants ;
+        this.persons=persons;
+        this.rooms=rooms;
     };
 };
 
-class ReserveToCheck
+class Reserve
 {
-    constructor(dateReserve, dateQ, adults)
+    constructor(dateReserve, dateQ, bedrooms, availability) 
     {
         this.dateReserve=dateReserve;
         this.dateQ=dateQ;
-        this.adults=adults;
+        this.bedrooms=bedrooms;
+        this.availability=availability;
     };
 };
+

@@ -1,33 +1,16 @@
-
-
 // modulo de disponibilidad
-const dateOcuppied = []
-
 let roomsQuantity = availData.room
 let dataTable = document.getElementById("availBedroomsTable")
 
-function getData(){
-        availData.dateIn = dayjs(document.getElementById('date').value)
+function getData()
+{
+        availData.dateIn = dayjs(document.getElementById('date').value),
         availData.nights = Number(document.getElementById('night').value),
         availData.adults = Number(document.getElementById('adult').value),
         availData.kids = Number(document.getElementById('kid').value)
+
 }
 
-function datePush()
-{
-        if(dateOcuppied.includes(`${availData.dateIn}`))
-        {
-                return false
-        }
-        else 
-        {
-                availData.dateIn+=availData.nights.push(dateOcuppied)
-        }
-}
-
-function checkSelectedRoom(){
-        alert(selectedRoom);
-};
 
 function verifyFormComplete()
 {
@@ -42,71 +25,67 @@ function verifyFormComplete()
         };
 };
 
-function roomReserveArrayCheck()
-{
-        let roomReserved = [];
-        if(!localStorage.getItem('roomReservedJson'))
-        {
-                localStorage.setItem('roomReservedJson', JSON.stringify(roomReserved));
-        }
-        else{
-                JSON.parse(localStorage.getItem('roomReservedJson'));
-        };      
-        return roomReserved;
-};
-
 function verifyAvailavility()
 {
-        let roomReserved = roomReserveArrayCheck()
-
-        if(roomReserved.length!=0)
+        let bedroomsStockLocal = JSON.parse(localStorage.getItem('bedroomsStockBase'));
+        let bedroomsCheck = new AvailToReserve (availData.dateIn, availData.nights, availData.adults+availData.kids, bedroomsStockLocal);
+        let availablesRooms = bedroomsStockLocal.filter((avail)=> avail.availability === true && avail.occupantsMax>=bedroomsCheck.persons);
+        
+        if (availablesRooms.length === 0)
         {
-                roomReserved.foreach((reserve) =>
-                {
-                        if(reserve.availability>0 && reserve.occupantsMax>=adults)
-                        {
-                                const bedroomStockFiltered = bedroomsStockJSON.filter((maxOc) =>maxOc.occupantsMax>=availData.adults);
-                                return bedroomStockFiltered;
-                        }
-                        else
-                        {
-                                alert(`Lo sentimos, No tenemos habitaciones disponibles para las fechas seleccionadas
-                                Por favor reintete en otra fechas.
-                                ¡Muchas Gracias!`)
-                        };
-                });
+                alert(`Lo sentimos, No tenemos habitaciones disponibles para las fechas seleccionadas.
+                        Por favor reintete en otra fechas.
+                        ¡Muchas Gracias!`);    
         }
-        else{
-                bedroomStockFiltered = bedroomsStockJSON.filter((maxOc) =>maxOc.occupantsMax>=availData.adults);
-                filterBedrooms(bedroomStockFiltered)
+        else
+        {
+                localStorage.setItem('availabilityTable', JSON.stringify(availablesRooms));
         };
 };
 
-function filterBedrooms(bedroomsStockFiltered){
-        console.log(bedroomsStockFiltered);
-};
+function createRoomsReserve(){
+        let roomsReserved =[];
+        if(!JSON.parse(localStorage.getItem('roomsReserved')))
+        {
+                roomsReserved = localStorage.setItem("roomsReserved", JSON.stringify(roomsReserved))
+        }
+}
 
 function prepareReserve(selectedRoom)
 {
-        let reserve = new Reserve(availData.dateIn, availData.nights, selectedRoom.id, selectedRoom.availability, selectedRoom.occupantsMax)
-        let roomReserved = [];
-        roomReserved = JSON.parse(localStorage.getItem('roomReservedJson'));
+        let dateToReserve;
+        let reserve;
 
-        reserve.availability -= 1;
-        
-        if (reserve.dateQ>1)
-        {        
-                for(let i=1; i<=reserve.dateQ; i++)
+        let roomsReserved = JSON.parse(localStorage.getItem('roomsReserved'));
+
+        if (availData.nights>1)
+        {    
+                for(let i=0; i<availData.nights; i++)
                 {
-                        dayjs(reserve.dateReserve.add(1, 'day'));
-                        roomReserved.push(reserve);
+                        dateToReserve = dayjs(availData.dateIn.add(i,'day'));
+
+                        reserve = new Reserve(dateToReserve, availData.nights, selectedRoom.id, selectedRoom.availability);
+                        
+                        reserve.availability = false;
+                        
+                        roomsReserved.push(reserve);
                 };
         }
         else
         {
-                roomReserved.push(reserve);
+                roomsReserved.push(reserve);
         };
-
-        roomReserved = localStorage.setItem("roomReservedJson", JSON.stringify(roomReserved));        
+        console.log(roomsReserved);
+        roomsReserved = localStorage.setItem("roomsReserved", JSON.stringify(roomsReserved));        
 };
 
+/* 
+       !esta seccion se deberìa ejecutar al final
+        let occupied = []
+        let reserve = new Reserve(availData.dateIn, availData.nights, bedroomsStock)
+       ? se utilizara esta parte       
+        let roomReserved = roomReserveArrayCheck();*
+        function checkSelectedRoom()
+{
+        alert(selectedRoom);
+};*/

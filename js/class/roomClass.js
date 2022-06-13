@@ -17,36 +17,42 @@ class Room
 };
 
 // HABITACIONES CATEGORIA SUPERIOR
-const habitacion1 = new Room(1,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, 5 );
-const habitacion2 = new Room(2,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, 5 );
-const habitacion3 = new Room(3,'Triple Superior Familiar', 2, 1, 1, 3, 3, 2, 8000, 2 );
-const habitacion4 = new Room(4,'Triple Superior', 3, 3, 0, 3, 3, 2, 8000, 1 );
-const habitacion5 = new Room(5,'Cuadruople Superior Matrimonial', 2, 0, 2, 4, 4, 3, 10000, 1 );
-const habitacion6 = new Room(6,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 10000, 2 );
-const habitacion7 = new Room(7,'Cuadruple Superior', 4, 4, 0, 4, 4, 3, 6000, 1 );
+const habitacion1 = new Room(1,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion2 = new Room(2,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion3 = new Room(3,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion4 = new Room(4,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion5 = new Room(5,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion6 = new Room(6,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true );
+const habitacion7 = new Room(7,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true );
+const habitacion8 = new Room(8,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true );
+const habitacion9 = new Room(9,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true );
+const habitacion10 = new Room(10,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true );
+const habitacion11 = new Room(11,'Triple Superior Familiar', 2, 1, 1, 3, 3, 2, 8000, true );
+const habitacion12 = new Room(12,'Triple Superior Familiar', 2, 1, 1, 3, 3, 2, 8000, true );
+const habitacion13 = new Room(13,'Triple Superior', 3, 3, 0, 3, 3, 2, 8000, true );
+const habitacion14 = new Room(14,'Cuadruople Superior Matrimonial', 2, 0, 2, 4, 4, 3, 10000, true );
+const habitacion15 = new Room(15,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 10000, true );
+const habitacion16 = new Room(16,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 10000, true );
+const habitacion17 = new Room(17,'Cuadruple Superior', 4, 4, 0, 4, 4, 3, 6000, true );
 
 // HABITACIONES CATEGORIA STANDARD
-const habitacion8 = new Room(8,'Doble Estandard Matrimonial', 1, 0, 1, 2, 2, 1, 4500, 3 );
-const habitacion9 = new Room(9,'Doble Estandard', 1, 0, 1, 2, 2, 1, 4500, 2 );
-const habitacion10 = new Room(10,'Triple Estandad Familiar', 1, 0, 1, 2, 2, 1, 6000, 2 );
-const habitacion11 = new Room(11,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, 3 );
+const habitacion18 = new Room(18,'Doble Estandard Matrimonial', 1, 0, 1, 2, 2, 1, 4500, true );
+const habitacion19 = new Room(19,'Doble Estandard Matrimonial', 1, 0, 1, 2, 2, 1, 4500, true );
+const habitacion20 = new Room(20,'Doble Estandard Matrimonial', 1, 0, 1, 2, 2, 1, 4500, true );
+const habitacion21 = new Room(21,'Doble Estandard', 1, 0, 1, 2, 2, 1, 4500, true );
+const habitacion22 = new Room(22,'Doble Estandard', 1, 0, 1, 2, 2, 1, 4500, true );
+const habitacion23 = new Room(23,'Triple Estandad Familiar', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion24 = new Room(24,'Triple Estandad Familiar', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion25 = new Room(25,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true);
+const habitacion26 = new Room(26,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+const habitacion27 = new Room(27,'Doble Superior Matrimonial', 1, 0, 1, 2, 2, 1, 6000, true );
+// se crea array y se envia a localStorage
+function bedroomsStockToLocalSt(){
+    const bedroomsStock = [habitacion1, habitacion2, habitacion3, habitacion4, habitacion5, habitacion6, habitacion7, habitacion8, habitacion9, habitacion10, habitacion11, habitacion12, habitacion13, habitacion14, habitacion15, habitacion16, habitacion17, habitacion18, habitacion19, habitacion20, habitacion21, habitacion22, habitacion23, habitacion24, habitacion25, habitacion26, habitacion27];
 
-const bedroomsStock = [habitacion1, habitacion2, habitacion3, habitacion4, habitacion5, habitacion6, habitacion7, habitacion8, habitacion9, habitacion10, habitacion11];
-
-let bedroomsStockJSON
-
-function saveBedroomsStockToJSON(bedroomsStock)
-{
-    bedroomsStockJSON = JSON.stringify(bedroomsStock);
-    localStorage.setItem("bedroomsStock", bedroomsStockJSON);    
-};
-
-saveBedroomsStockToJSON(bedroomsStock);
-
-function requireBedroomsStocKToJSON(bedroomsStock){
-    bedroomsStockJSON = JSON.parse(localStorage.getItem("bedroomStock"));
-    return bedroomsStock;
+    
+    localStorage.setItem('bedroomsStockBase', JSON.stringify(bedroomsStock));
 }
 
-bedroomsStockJSON = requireBedroomsStocKToJSON(bedroomsStock);
+bedroomsStockToLocalSt();
 

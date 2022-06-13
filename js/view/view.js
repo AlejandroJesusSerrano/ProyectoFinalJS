@@ -23,28 +23,24 @@ function viewAvailData()
 
     const availTableThNights = document.createElement ("th");
     availTableThNights.innerHTML = `<p class="tableHeaderText">Cant. de Noches</p>`;  
-    availDataTr.appendChild(availTableThNights)
+    availDataTr.appendChild(availTableThNights);
 
-    const availTableThDateOut = document.createElement("th")
+    const availTableThDateOut = document.createElement("th");
     availTableThDateOut.innerHTML=`<p class="tableHeaderText">Fecha de Salida</p>`;
-    availDataTr.appendChild(availTableThDateOut)
+    availDataTr.appendChild(availTableThDateOut);
 
-    const availTableThRoomQ = document.createElement("th")
-    availTableThRoomQ.innerHTML=`<p class="tableHeaderText">Cant. de Habitaciones</p>`;
-    availDataTr.appendChild(availTableThRoomQ)
-
-    const availTableThAdultsQ = document.createElement("th")
+    const availTableThAdultsQ = document.createElement("th");
     availTableThAdultsQ.innerHTML=`<p class="tableHeaderText">Cant. de Adultos</p>`;
-    availDataTr.appendChild(availTableThAdultsQ)
+    availDataTr.appendChild(availTableThAdultsQ);
     
-    const availTableThKidsQ = document.createElement("th")
+    const availTableThKidsQ = document.createElement("th");
     availTableThKidsQ.innerHTML=`<p class="tableHeaderText">Cant. de Niños</p>`;
-    availDataTr.appendChild(availTableThKidsQ)
+    availDataTr.appendChild(availTableThKidsQ);
 
-    availDataTable.appendChild(availDataTr)    
+    availDataTable.appendChild(availDataTr);    
     divAvailDataTable.appendChild (availDataTable);
 
-    const formAvailDataCaptureTr = document.createElement("tr")
+    const formAvailDataCaptureTr = document.createElement("tr");
 
     let formAvailDataCaptureTdDate = document.createElement("td");
     formAvailDataCaptureTdDate.innerHTML = availData.dateIn.format("DD/MM/YYYY");
@@ -68,7 +64,7 @@ function viewAvailData()
 
     availDataTable.appendChild (formAvailDataCaptureTr);
     
-    showAvailDataAndButton()
+    showAvailDataAndButton();
 };
 
 
@@ -110,52 +106,50 @@ function showAvailableRooms()
     tdPrice.innerHTML = "Precio: AR$";
     header.appendChild(tdPrice);
 
-    const tdAvails = document.createElement("th");
+    /*const tdAvails = document.createElement("th");
     tdAvails.innerHTML = "Quedan disponibles";
-    header.appendChild(tdAvails);
+    header.appendChild(tdAvails);*/
 
     availDivContainer.appendChild(header);
 
     // se pinta tabla de seleccion de habitaciones basado en roomClass
 
-    bedroomsStockFiltered.forEach((room)=>{
-
-        const nodoTr = document.createElement("tr");
-        let nodoTd = document.createElement("td");
-        nodoBtn = document.createElement("button");
+    let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));
+    console.log(availTableData);
+    availTableData.forEach((bedroom)=> 
+    {
+        let nodoTr = document.createElement('tr');
+        let nodoTd = document.createElement('td');
+        nodoBtn = document.createElement('button');
         
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML=room.id;
-        nodoTd.setAttribute("id", "idRoom")
-        nodoTd.setAttribute("style","display:none");
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML=bedroom.id;
+        nodoTd.setAttribute('id', 'idRoom')
+        nodoTd.setAttribute('style','display:none');
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML=room.type;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML=bedroom.type;
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.bedSingle;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML = bedroom.bedSingle;
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.bedDouble;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML = bedroom.bedDouble;
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.occupantsMax;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML = bedroom.occupantsMax;
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.kidsMax;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML = bedroom.kidsMax;
         nodoTr.appendChild(nodoTd);
 
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.price;
-        nodoTr.appendChild(nodoTd);
-
-        nodoTd = document.createElement("td");
-        nodoTd.innerHTML = room.availability;
+        nodoTd = document.createElement('td');
+        nodoTd.innerHTML = bedroom.price;
         nodoTr.appendChild(nodoTd);
 
         nodoBtn.setAttribute('id', 'chooseRoomBtn');
@@ -167,9 +161,8 @@ function showAvailableRooms()
             // se apunta al boton de cada fila que representa un objeto
             selection = event.target.parentNode.firstChild.innerHTML;
             // por medio de find. se busca limitar al ID
-            selectedRoom = bedroomsStockJSON.find((el) => el.id == selection);
+            selectedRoom = availTableData.find((el) => el.id == selection);
             alert(`Ha seleccionado la habitacion ${selectedRoom.type}`)
-            roomReserveArrayCeck();
             prepareReserve(selectedRoom);
         });
 
@@ -177,4 +170,3 @@ function showAvailableRooms()
             
     });
 };
-
