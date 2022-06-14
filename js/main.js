@@ -82,20 +82,21 @@ function bedroomsFiltered(){
 
         let availTableDataFiltered=[];
 
-        let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved'))
-        let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));
-        console.log(reservedRooms);
-        if(reservedRooms.length === 0)
+        let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved')) //se trae array de objetos reservas realizadas
+        let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));//se trae array de habitaciones disponibles segùn ocupantes
+        
+        if(reservedRooms.length === 0)//si no esta cargado el array
         {
-                availTableDataFiltered = availTableData
+                availTableDataFiltered = availTableData//toma el array de habitaciones 
         }
-        else
+        else//si el array de reservas sirve se comienza a recorrer los array para filtrar y solo mostrar las disponibles
         {
-                let flag = false;
-                
+                let flag = false;//se coloca bandera como metodo de control
+                //abajo:se declaran las variables para contar
                 let i = 0
                 let dtr =  0
                 let r = 0
+                //comienzan los recorridos
                 while (r<reservedRooms.length)
                 
                 {       
@@ -122,6 +123,7 @@ function bedroomsFiltered(){
                 };    
 
         };
+        //se sube el array filtrado al local storage pra ser usado al pintar la tabla de disponibilidades
         localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered))                
 };
         //         availTableData.forEach(bedroom => {
