@@ -106,17 +106,12 @@ function showAvailableRooms()
     tdPrice.innerHTML = "Precio: AR$";
     header.appendChild(tdPrice);
 
-    /*const tdAvails = document.createElement("th");
-    tdAvails.innerHTML = "Quedan disponibles";
-    header.appendChild(tdAvails);*/
-
     availDivContainer.appendChild(header);
 
     // se pinta tabla de seleccion de habitaciones basado en roomClass
+    let availTableDataFiltered = JSON.parse(localStorage.getItem('roomsFilteredTable'));
 
-    let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));
-    console.log(availTableData);
-    availTableData.forEach((bedroom)=> 
+    availTableDataFiltered.forEach((bedroom)=>
     {
         let nodoTr = document.createElement('tr');
         let nodoTd = document.createElement('td');
@@ -161,7 +156,7 @@ function showAvailableRooms()
             // se apunta al boton de cada fila que representa un objeto
             selection = event.target.parentNode.firstChild.innerHTML;
             // por medio de find. se busca limitar al ID
-            selectedRoom = availTableData.find((el) => el.id == selection);
+            selectedRoom = availTableDataFiltered.find((el) => el.id == selection);
             alert(`Ha seleccionado la habitacion ${selectedRoom.type}`)
             prepareReserve(selectedRoom);
         });

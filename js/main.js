@@ -51,11 +51,9 @@ function createRoomsReserve(){
         }
 }
 
-function prepareReserve(selectedRoom)
-{
+function prepareReserve(selectedRoom){
         let dateToReserve;
         let reserve;
-
         let roomsReserved = JSON.parse(localStorage.getItem('roomsReserved'));
 
         if (availData.nights>1)
@@ -63,11 +61,9 @@ function prepareReserve(selectedRoom)
                 for(let i=0; i<availData.nights; i++)
                 {
                         dateToReserve = dayjs(availData.dateIn.add(i,'day'));
-
                         reserve = new Reserve(dateToReserve, availData.nights, selectedRoom.id, selectedRoom.availability);
-                        
+
                         reserve.availability = false;
-                        
                         roomsReserved.push(reserve);
                 };
         }
@@ -79,13 +75,95 @@ function prepareReserve(selectedRoom)
         roomsReserved = localStorage.setItem("roomsReserved", JSON.stringify(roomsReserved));        
 };
 
-/* 
-       !esta seccion se deberìa ejecutar al final
-        let occupied = []
-        let reserve = new Reserve(availData.dateIn, availData.nights, bedroomsStock)
-       ? se utilizara esta parte       
-        let roomReserved = roomReserveArrayCheck();*
-        function checkSelectedRoom()
-{
-        alert(selectedRoom);
-};*/
+function bedroomsFiltered(){
+        debugger
+        let dayCheckIn = availData.dateIn;
+        let nightsQ = Number(availData.nights);
+
+        let availTableDataFiltered=[];
+
+        let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved'))
+        let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));
+        console.log(reservedRooms);
+        if(reservedRooms.length === 0)
+        {
+                availTableDataFiltered = availTableData
+        }
+        else
+        {
+                let flag = false;
+                
+                let i = 0
+                let dtr =  0
+                let r = 0
+                while (r<reservedRooms.length)
+                
+                {       
+                        while(dtr<nightsQ)
+                        {
+                                let dayToReserve = dayjs(dayCheckIn.add(dtr, 'day'));
+
+                                while (i<availTableData.length)
+                                {
+                                        if (dayToReserve != dayjs(reservedRooms.dateReserve) && availTableData[i].id !== reservedRooms[r].bedrooms) 
+                                        {
+                                                flag = true;
+                                        }
+                                        else
+                                        {
+                                                flag = false;
+                                        }
+                                        flag===true && availTableDataFiltered.push(availTableData[i]);
+                                        i++
+                                };
+                                dtr++
+                        };
+                        r++
+                };    
+
+        };
+        localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered))                
+};
+        //         availTableData.forEach(bedroom => {
+        //                 let flag = 0;
+        //                 let i = 0;
+        //                 let j = 0;
+        //                 while (i<nightsQ && flag === 0 )
+        //                 {
+        //                         let dayW = dayjs(dayCheckIn.add(i, 'day'));
+                        
+        //                         while(j<=reservedRooms.leght && flag === 0){
+        //                                 (dayW!=reservedRooms.dateReserve && bedroom.id !== reservedRooms.bedrooms) ? j++ : flag=1;
+        //                         };
+        //                 };
+        //                 if(flag === 0){
+        //                         availTableDataFiltered.push(bedroom)
+        //                 };
+        //         });
+        // };
+        
+                
+                /*for (let d = 0; d<nightsQ;d++){
+                        j
+                }
+                for (let r = 0; r<reservedRooms.length; r++){
+                        (bedroom.id === reservedRooms[r].bedrooms) ? flag=1 : flag=0
+                } */
+                
+
+        
+        
+        
+        
+        // if(reservedRooms.length !== 0)
+        // {
+        //         let availTableDataFiltered = availTableData.filter(bedroom=>
+        //                 reservedRooms.filter(reserve=> !== dayCheckIn && bedroom[bedroom.id] == reserve[reserve.bedrooms] ))
+        // }
+     /* 
+        else
+        {
+                availTableDataFiltered = availTableData;
+        };*/
+
+        
