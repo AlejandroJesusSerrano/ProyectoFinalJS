@@ -76,11 +76,10 @@ function prepareReserve(selectedRoom){
 };
 
 function bedroomsFiltered(){
-        debugger
-        let dayCheckIn = availData.dateIn;
-        let nightsQ = Number(availData.nights);
+        let dayCheckIn = availData.dateIn;//se toma la fecha de reserva puesta en el formulario
+        let nightsQ = Number(availData.nights);//se captura la cantidad de noches que pusieron en el formulario.
 
-        let availTableDataFiltered=[];
+        let availTableDataFiltered=[];//se declara el array a completar para subir al localStorage
 
         let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved')) //se trae array de objetos reservas realizadas
         let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));//se trae array de habitaciones disponibles segùn ocupantes
@@ -97,15 +96,15 @@ function bedroomsFiltered(){
                 let dtr =  0
                 let r = 0
                 //comienzan los recorridos
-                while (r<reservedRooms.length)
+                while (r<reservedRooms.length)//se recorre array de reservas
                 
                 {       
-                        while(dtr<nightsQ)
+                        while(dtr<nightsQ)//se calculan los dias que se quieren reservar para verificar disponibilidad
                         {
                                 let dayToReserve = dayjs(dayCheckIn.add(dtr, 'day'));
 
-                                while (i<availTableData.length)
-                                {
+                                while (i<availTableData.length)//se recorre array de habitaciones
+                                {       //segun las coincidencias se modifica el valor de la bandera y segun el mismpo se sube o no la habitacion al array.
                                         if (dayToReserve != dayjs(reservedRooms.dateReserve) && availTableData[i].id !== reservedRooms[r].bedrooms) 
                                         {
                                                 flag = true;
@@ -126,6 +125,31 @@ function bedroomsFiltered(){
         //se sube el array filtrado al local storage pra ser usado al pintar la tabla de disponibilidades
         localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered))                
 };
+
+function loadWeather(){
+        const openWheather = 'https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={9c6abd76defcf5324154d49943df97fe}'
+        
+        fetch(openWheather)
+        .then((response)=>response.json())
+        .then((json)=>showWheather(json))
+        .catch(alert(`la api no responde`));
+};
+
+function showWheather(data){
+        const {main, description, icon,}=wheather
+
+        const frame = document.getElementById('weatherDiv');
+        data.forEach(date=>{
+                const wheather = document.createElement('div');
+                wheather.innerHTML=`<h2>${date.name}</h2>
+                                        <h4>${main}</h4>
+                                        <p>${description}</p>
+                                        <div>${icon}</div>`
+        frame.appendChild('div');
+
+        });
+}
+
         //         availTableData.forEach(bedroom => {
         //                 let flag = 0;
         //                 let i = 0;
