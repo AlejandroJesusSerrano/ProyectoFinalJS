@@ -35,7 +35,7 @@ btnAvail.addEventListener('click', ()=>
 
 showAvailBtnToReserve.addEventListener('click', ()=>
 {
-    bedroomsFiltered()
+    reserveCompare()
     showAvailableRooms();
     // verifyAvailavility();
 });

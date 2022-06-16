@@ -30,9 +30,9 @@ const habitacion10 = new Room(10,'Doble Superior', 2, 2, 0, 2, 2, 1, 6000, true 
 const habitacion11 = new Room(11,'Triple Superior Familiar', 2, 1, 1, 3, 3, 2, 8000, true );
 const habitacion12 = new Room(12,'Triple Superior Familiar', 2, 1, 1, 3, 3, 2, 8000, true );
 const habitacion13 = new Room(13,'Triple Superior', 3, 3, 0, 3, 3, 2, 8000, true );
-const habitacion14 = new Room(14,'Cuadruople Superior Matrimonial', 2, 0, 2, 4, 4, 3, 10000, true );
-const habitacion15 = new Room(15,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 10000, true );
-const habitacion16 = new Room(16,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 10000, true );
+const habitacion14 = new Room(14,'Cuadruple Superior Matrimonial', 2, 0, 2, 4, 4, 3, 10000, true );
+const habitacion15 = new Room(15,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 9000, true );
+const habitacion16 = new Room(16,'Cuadruple Superior Familiar', 3, 2, 1, 4, 4, 3, 8000, true );
 const habitacion17 = new Room(17,'Cuadruple Superior', 4, 4, 0, 4, 4, 3, 6000, true );
 
 // HABITACIONES CATEGORIA STANDARD

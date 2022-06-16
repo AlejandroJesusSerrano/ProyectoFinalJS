@@ -75,56 +75,128 @@ function prepareReserve(selectedRoom){
         roomsReserved = localStorage.setItem("roomsReserved", JSON.stringify(roomsReserved));        
 };
 
-function bedroomsFiltered(){
+function extractDate(dayjs)
+{
+        let dateExtract = JSON.stringify(dayjs);
+        return dateExtract;
+};
+
+// function completeArrayEmpty(){
+        
+//         let reservedRooms=JSON.parse(localStorage.getItem('roomsReserved'))
+//         let availTableData=JSON.parse(localStorage.getItem('availabilityTable'));
+//         let availTableDataFiltered=[];
+
+        
+//         localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered));
+// }
+
+
+function reserveCompare()
+{
         let dayCheckIn = availData.dateIn;//se toma la fecha de reserva puesta en el formulario
         let nightsQ = Number(availData.nights);//se captura la cantidad de noches que pusieron en el formulario.
 
-        let availTableDataFiltered=[];//se declara el array a completar para subir al localStorage
-
-        let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved')) //se trae array de objetos reservas realizadas
         let availTableData = JSON.parse(localStorage.getItem('availabilityTable'));//se trae array de habitaciones disponibles segùn ocupantes
+        let reservedRooms = JSON.parse(localStorage.getItem('roomsReserved')) //se trae array de objetos reservas realizadas
+        let availTableDataFiltered=[];//se declara el array a completar para subir al localStorage
         
         if(reservedRooms.length === 0)//si no esta cargado el array
         {
                 availTableDataFiltered = availTableData//toma el array de habitaciones 
-        }
-        else//si el array de reservas sirve se comienza a recorrer los array para filtrar y solo mostrar las disponibles
-        {
-                let flag = false;//se coloca bandera como metodo de control
-                //abajo:se declaran las variables para contar
-                let i = 0
-                let dtr =  0
-                let r = 0
-                //comienzan los recorridos
-                while (r<reservedRooms.length)//se recorre array de reservas
                 
-                {       
-                        while(dtr<nightsQ)//se calculan los dias que se quieren reservar para verificar disponibilidad
+        }
+        else 
+        {
+        
+        let i;
+        let j;
+        let flagReserve;
+        
+        availTableData.forEach(bedroom=>
+                {
+                        flagReserve=true;
+                        i=0;
+                        while (i<nightsQ && flagReserve===true)
                         {
-                                let dayToReserve = dayjs(dayCheckIn.add(dtr, 'day'));
-
-                                while (i<availTableData.length)//se recorre array de habitaciones
-                                {       //segun las coincidencias se modifica el valor de la bandera y segun el mismpo se sube o no la habitacion al array.
-                                        if (dayToReserve != dayjs(reservedRooms.dateReserve) && availTableData[i].id !== reservedRooms[r].bedrooms) 
+                                j=0;
+                                while(j<reservedRooms.length && flagReserve===true)
+                                {
+                                        if(extractDate(reservedRooms[j].dateReserve)===JSON.stringify(dayjs(dayCheckIn.add(i, 'day'))))
                                         {
-                                                flag = true;
+                                                if (JSON.stringify(reservedRooms[j].bedrooms)===JSON.stringify(bedroom.id))
+                                                {
+                                                        flagReserve=false;
+                                                }
+                                                else{
+                                                        j++;
+                                                }
                                         }
-                                        else
-                                        {
-                                                flag = false;
+                                        else{
+                                                j++;
                                         }
-                                        flag===true && availTableDataFiltered.push(availTableData[i]);
-                                        i++
                                 };
-                                dtr++
+                                i++;
                         };
-                        r++
-                };    
-
+                        if(flagReserve===true)
+                        {       
+                                availTableDataFiltered.push(bedroom);
+                        };
+                        
+                });
         };
-        //se sube el array filtrado al local storage pra ser usado al pintar la tabla de disponibilidades
-        localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered))                
+        localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered));
 };
+
+
+
+        
+        
+        
+        
+//         let dayToCompare;
+//         let dateReserved
+//         let dateJs;
+                
+//         while (i<nightsQ && flag===true)
+//         {
+//                 dateJs = dayjs(dayCheckIn.add(i, 'day'))
+//                 dayToCompare = extractDate(dateJs);
+                        
+//                 j=0;
+                        
+//                 while(j<reservedRooms.length && flagReserve===true)
+//                 {
+//                         dateReserved = dayjs(reservedRooms[j].dateReserve)
+                
+//                         dateReservedFinal=extractDate(dateReserved)
+                                
+//                         if( !compareIdBedrooms(JSON.stringify(availTableData[i].id), JSON.stringify(reservedRooms[j].bedrooms)))
+//                         {
+//                                 flagReserve= false;   
+//                         }
+//                         else
+//                         {
+//                                 j++
+//                         }
+//                 };
+//                 i++
+//         //se sube el array filtrado al local storage pra ser usado al pintar la tabla de disponibilidades
+        
+
+        
+//         };
+// };
+
+// function compareIdBedrooms(idreserva, idhabitacion)
+// {
+//         if(idreserva === idhabitacion){
+//                 return false;
+//         }
+//         else{
+//                 return true;
+//         }
+// }
 
 /*function loadWeather(){
         const openWheather = 'https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={4713fa4ed0318d4221ba53070c6b44b0}'
