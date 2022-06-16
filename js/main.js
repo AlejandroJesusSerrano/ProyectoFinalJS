@@ -126,13 +126,13 @@ function bedroomsFiltered(){
         localStorage.setItem('roomsFilteredTable', JSON.stringify(availTableDataFiltered))                
 };
 
-function loadWeather(){
-        const openWheather = 'https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={9c6abd76defcf5324154d49943df97fe}'
+/*function loadWeather(){
+        const openWheather = 'https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={4713fa4ed0318d4221ba53070c6b44b0}'
         
         fetch(openWheather)
         .then((response)=>response.json())
         .then((json)=>showWheather(json))
-        .catch(alert(`la api no responde`));
+        .catch(()=>alert(`la api no responde`));
 };
 
 function showWheather(data){
@@ -150,6 +150,53 @@ function showWheather(data){
         });
 }
 
+apiBtns()
+const mainContainer = document.getElementById('weatherDiv');
+
+function apiBtns(){
+        btnW();
+        btnPreview();
+}
+
+function btnW(){
+        const btnW=document.getElementById('weatherBtn');
+        btnW.addEventListener('click', ()=>{
+                loadWeather();
+        });
+}
+
+function btnPreview(){
+const btnP=document.getElementById('posts');
+btnP.addEventListener('click', ()=>{
+        cargarPosts();
+        });
+}
+
+function cargarPosts() {
+        fetch("https://jsonplaceholder.typicode.com/posts/")
+                .then((response) => response.json())
+                .then((json) => mostrarDatos(json))
+                .catch(() => alert("La api no rtesponde"))
+}
+
+function mostrarDatos(data) 
+{
+        const div = document.getElementById("appContainer");
+        div.innerText = "";
+        data.forEach(blogPost => {
+                
+                const { title, body, } = blogPost
+                
+                const divPost = document.createElement("div");
+                divPost.innerHTML = `<h2>${title}</h2>
+                                <p>
+                                        ${body}
+                                </p>
+                                <hr />`
+                div.appendChild(divPost)
+        })
+};
+*/
         //         availTableData.forEach(bedroom => {
         //                 let flag = 0;
         //                 let i = 0;
@@ -186,7 +233,7 @@ function showWheather(data){
         //         let availTableDataFiltered = availTableData.filter(bedroom=>
         //                 reservedRooms.filter(reserve=> !== dayCheckIn && bedroom[bedroom.id] == reserve[reserve.bedrooms] ))
         // }
-     /* 
+/*
         else
         {
                 availTableDataFiltered = availTableData;

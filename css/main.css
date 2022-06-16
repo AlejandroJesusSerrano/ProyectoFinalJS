@@ -8052,24 +8052,24 @@ input[type="date"]::-webkit-inner-spin-button, ::-webkit-calendar-picker-indicat
           color: #f2f2f2;
           text-decoration: underline; }
 
-.title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+.title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
   font-family: "Cinzel Decorative", cursive;
   font-size: 8em;
   line-height: 1.5em;
   color: #210606;
   padding: 2px;
   text-align: center; }
-  .title span, .title404 span, .titleBig span, .subtitle span, .dateReserveText span, .subtitle404 span, .cardTitle span, .contactInfo h4 span, .contactInfo .h4 span, .cardTitleLight span {
+  .title span, .title404 span, .titleBig span, .subtitle span, .dateReserveText span, .subtitle404 span, .cardTitle span, .contactInfo h4 span, .contactInfo .h4 span, .cardTitleSm span, .cardTitleLight span {
     font-family: "Cinzel Decorative", cursive;
     color: #5d4037; }
   @media only screen and (max-width: 1280px) {
-    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 6em; } }
   @media only screen and (max-width: 960px) {
-    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 4em; } }
   @media only screen and (max-width: 360px) {
-    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .title, .title404, .titleBig, .subtitle, .dateReserveText, .subtitle404, .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 3em; } }
 
 .title404 {
@@ -8214,17 +8214,29 @@ div .icons {
     .impressionDark .container-fluid .paragraph, .impressionDark .container-sm .paragraph, .impressionDark .container-md .paragraph, .impressionDark .container-lg .paragraph, .impressionDark .container-xl .paragraph, .impressionDark .container-xxl .paragraph {
       font-size: 1.5em; } }
 
-.cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+.cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
   font-size: 6em; }
   @media only screen and (max-width: 1280px) {
-    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 4em; } }
   @media only screen and (max-width: 960px) {
-    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 3em; } }
   @media only screen and (max-width: 360px) {
-    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleLight {
+    .cardTitle, .contactInfo h4, .contactInfo .h4, .cardTitleSm, .cardTitleLight {
       font-size: 2.5em; } }
+
+.cardTitleSm {
+  font-size: 4em; }
+  @media only screen and (max-width: 1280px) {
+    .cardTitleSm {
+      font-size: 3em; } }
+  @media only screen and (max-width: 960px) {
+    .cardTitleSm {
+      font-size: 2.5em; } }
+  @media only screen and (max-width: 360px) {
+    .cardTitleSm {
+      font-size: 2em; } }
 
 .cardTitleLight {
   color: #d7ccc8; }

@@ -1,7 +1,7 @@
 const btnAvail = document.getElementById('availFormBtn');
 const showAvailBtnToReserve = document.getElementById('toReserveBtn');
-const btnW=document.getElementById('weatherBtn');
-    
+
+
 
 
 function passbtn()
@@ -40,8 +40,7 @@ showAvailBtnToReserve.addEventListener('click', ()=>
     // verifyAvailavility();
 });
 
-btnW.addEventListener('click', ()=>{
-    loadWeather();
-});
+
+
 
 
