@@ -10,6 +10,7 @@ function showAvailDataAndButton(){
 function viewAvailData()
 {
     let divAvailDataTable = document.getElementById("showAvailFormTableData");
+    divAvailDataTable.setAttribute('class', 'tableLight price mx-auto wow animate__animated animate__fadeInLeft')
     
     let availDataTable = document.createElement("table");
     availDataTable.setAttribute("id", "availDataTableRefShow");
@@ -71,6 +72,7 @@ function viewAvailData()
 function showAvailableRooms()
 {
     let availDivContainer = document.getElementById("availableRooms")
+    availDivContainer.setAttribute('class', 'table price mx-auto wow animate__animated animate__fadeInLeft')
     
     let availBedroomsList = document.createElement("table")
     availBedroomsList.setAttribute('id', 'availBedroomsTable')   
@@ -157,7 +159,7 @@ function showAvailableRooms()
             selection = event.target.parentNode.firstChild.innerHTML;
             // por medio de find. se busca limitar al ID
             selectedRoom = availTableDataFiltered.find((el) => el.id == selection);
-            alert(`Ha seleccionado la habitacion ${selectedRoom.type}`)
+            confirmReserve(selectedRoom)//alert(`Ha seleccionado la habitacion ${selectedRoom.type}`)
             prepareReserve(selectedRoom);
         });
 
@@ -165,3 +167,45 @@ function showAvailableRooms()
             
     });
 };
+
+function confirmReserve(selctedRoom){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: `Estas por reservar la habitacion ${selectedRoom.type}`,
+        text: "A continuacion se pasara al formulario de Pago!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Continuar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire({
+            title:'Perfecto!',
+            text:'Continuemos con la reserva.',
+            icon:'success',
+            
+          }).then((toweb) =>{ 
+            toweb.isConfirmed
+                window.location.href='../../../formpago.html'
+            
+          })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Ha cancelado la Solicitud',
+            'Elija otra habiaciòn',
+            'error'
+          )
+        }
+      })
+}

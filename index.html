@@ -55,7 +55,7 @@
                         <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reservascon.html">Reservas</a>
+                        <a class="nav-link" href="formpago.html">Reservas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="habitaciones.html">Habitaciones</a>
@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="dateInput col-xs-12 col-xl-4">
                             <label for="date" class="dateLbl" id="dateLbl" name="dateLbl">Ingreso: </label>
-                            <input type="date" name="date" id="date" class="indexDateInput">
+                            <input type="date" name="date" id="date" class="indexDateInput" min="2022/06/16">
                         </div>
                         <div class="dateInput col-xs-12 col-xl-4">
                             <label for="night" class="dateLbl" id="nightLbl" name="nightLbl">Noches: </label>
@@ -350,5 +350,6 @@
     <script>
         new WOW().init();
     </script>
+    <script src="js/library/sweetalert2.all.min.js"></script>
 </body>
 </html>

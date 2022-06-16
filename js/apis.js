@@ -27,7 +27,12 @@ function loadPosts()
     fetch("https://jsonplaceholder.typicode.com/posts/")
     .then((response)=>response.json())
     .then((json)=>showPosts(json))
-    .catch(()=>alert('En este moneto no podemos brindarle el servicio requerido, por favor reintente en unos minutos'));
+    .catch(()=>Swal.fire({
+        icon: 'error',
+        title: 'Lo Sentimos...',
+        text: 'Esta Aplicaciòn no esta disponible!.',
+        text:'Por favor reintenta en unos instantes'
+      }));
     ;
 }
 
@@ -36,7 +41,12 @@ function loadWeather()
     fetch("https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={4713fa4ed0318d4221ba53070c6b44b0}")
     .then((response)=>response.json())
     .then((json)=>showWheather(json))
-    .catch(()=>alert('En este moneto no podemos brindarle el servicio requerido, por favor reintente en unos minutos'));
+    .catch(()=>Swal.fire({
+        icon: 'error',
+        title: 'Lo Sentimos...',
+        text: 'Esta Aplicaciòn no esta disponible!.',
+        text:'Por favor reintenta en unos instantes'
+      }));
 }
 
 function showPosts(data)
@@ -70,7 +80,7 @@ function showWheather(wheather)
                                     <h4>${main}</h4>
                                     <p>${description}</p>
                                     <div>${icon}</div>`
-    frame.appendChild('frame');
+    div.appendChild(frame);
 
     });
 };
