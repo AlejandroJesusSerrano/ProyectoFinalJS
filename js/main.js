@@ -1,6 +1,7 @@
 // modulo de disponibilidad
 let roomsQuantity = availData.room
 let dataTable = document.getElementById("availBedroomsTable")
+loadWeather()
 
 function getData()
 {
@@ -92,7 +93,7 @@ function prepareReserve(selectedRoom){
         {
                 roomsReserved.push(reserve);
         };
-        console.log(roomsReserved);
+        
         roomsReserved = localStorage.setItem("roomsReserved", JSON.stringify(roomsReserved));        
 };
 

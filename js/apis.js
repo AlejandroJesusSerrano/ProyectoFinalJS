@@ -1,86 +1,32 @@
-programBtns()
 
-const apisContainer = document.getElementById('apisContainer')
-
-function programBtns(){
-    btnShowPosts()
-    btnW();
-}
-
-function btnShowPosts()
-{
-    const btnPostApi = document.getElementById('posts');
-    btnPostApi.addEventListener('click', ()=>{
-        loadPosts();
-    });
-};
-
-function btnW(){
-    const btnW=document.getElementById('weatherBtn');
-    btnW.addEventListener('click', ()=>{
-            loadWeather();
-    });
-}
-
-function loadPosts()
-{
-    fetch("https://jsonplaceholder.typicode.com/posts/")
-    .then((response)=>response.json())
-    .then((json)=>showPosts(json))
-    .catch(()=>Swal.fire({
-        icon: 'error',
-        title: 'Lo Sentimos...',
-        text: 'Esta Aplicaciòn no esta disponible!.',
-        text:'Por favor reintenta en unos instantes'
-      }));
-    ;
-}
+const currentWeatherEl = document.getElementById('apisContainer')
 
 function loadWeather()
 {
-    fetch("https://api.openweathermap.org/data/2.5/weather?lat={-26.073}&lon={-65.9761}&appid={4713fa4ed0318d4221ba53070c6b44b0}")
+    fetch("https://api.openweathermap.org/data/2.5/weather?id=3863502&lang=sp&units=metric&appid=4713fa4ed0318d4221ba53070c6b44b0")
     .then((response)=>response.json())
-    .then((json)=>showWheather(json))
-    .catch(()=>Swal.fire({
-        icon: 'error',
-        title: 'Lo Sentimos...',
-        text: 'Esta Aplicaciòn no esta disponible!.',
-        text:'Por favor reintenta en unos instantes'
-      }));
-}
-
-function showPosts(data)
-{
-    const div=document.getElementById('apisContainer');
-
-    data.forEach(blogPost => {
-
-        const {title, body} = blogPost;
-
-        const divPost = document.createElement('div');
-        divPost.innerHTML=`<h2 class="cardTitleSm">${title}</h2>
-                            <p class="paragraph">${body}</p>
-                            <hr />`        
-
-    div.appendChild(divPost)
-    });
+    .then((data)=>showWheather(data))
 };
 
-function showWheather(wheather)
+function showWheather(data)
 {
     const div = document.getElementById('apisContainer');
-    
-    wheather.forEach(data=>{
-        const {name, main, description, icon} = data;
-    
-        const frame = document.getElementById('div');
-    
-            const wheather = document.createElement('div');
-            wheather.innerHTML=`<h2>${name}</h2>
-                                    <h4>${main}</h4>
-                                    <p>${description}</p>
-                                    <div>${icon}</div>`
-    div.appendChild(frame);
-
-    });
+    const{weather, main} = data; 
+    const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+   
+    const currentWheather = document.createElement('div');
+    currentWheather.innerHTML=`<div class="container">
+                            <div><h4>Clima</h4></div>
+                            <div class="container-fluid"><img class="icons" src=${icon} alt=${weather[0]["main"]}></div>
+                            <div>${weather[0]["main"]}</div>
+                            <div>${weather[0]["description"]}</div>
+                        </div>
+                        <div class="container">
+                            <div class="container row"><h4>Temperatura</h4>
+                            <div><p class="paragraph">Temperatura actual: ${Math.round(main.temp)}<sup>ºC</sup></p></div>
+                            <div><p class="paragraph">Sensacion tèrmica: ${Math.round(main.feels_like)}<sup>ºC</sup></p></div>
+                            <div><p class="paragraph">Màxima prevista: ${Math.round(main.temp_max)}</p>ºC</div>
+                            <div><p class="paragraph">Mìnima prevista: ${Math.round(main.temp_min)}</p>ºC</div>
+                        </div>`
+    div.appendChild(currentWheather);
 };

@@ -194,7 +194,7 @@ function confirmReserve(selctedRoom){
             
           }).then((toweb) =>{ 
             toweb.isConfirmed
-                window.location.href='../../../formpago.html'
+                window.location.href='../../../formpago.html';
             
           })
         } else if (
@@ -205,7 +205,6 @@ function confirmReserve(selctedRoom){
             'Ha cancelado la Solicitud',
             'Elija otra habiaciòn',
             'error'
-          )
-        }
-      })
-}
+          )};
+      });
+};
