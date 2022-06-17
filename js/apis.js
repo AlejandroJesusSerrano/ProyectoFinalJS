@@ -25,8 +25,8 @@ function showWheather(data)
                             <div class="container row"><h4>Temperatura</h4>
                             <div><p class="paragraph">Temperatura actual: ${Math.round(main.temp)}<sup>ºC</sup></p></div>
                             <div><p class="paragraph">Sensacion tèrmica: ${Math.round(main.feels_like)}<sup>ºC</sup></p></div>
-                            <div><p class="paragraph">Màxima prevista: ${Math.round(main.temp_max)}</p>ºC</div>
-                            <div><p class="paragraph">Mìnima prevista: ${Math.round(main.temp_min)}</p>ºC</div>
+                            <div><p class="paragraph">Màxima prevista: ${Math.round(main.temp_max)}</p><sup>ºC</sup></div>
+                            <div><p class="paragraph">Mìnima prevista: ${Math.round(main.temp_min)}</p><sup>ºC</sup></div>
                         </div>`
     div.appendChild(currentWheather);
 };
